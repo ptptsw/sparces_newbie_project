@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import EventNameRoot from './components/EventNameRoot'
+import moment from 'moment';
+import { Component } from 'react';
+import CalenderRoot from './components/CalendarRoot';
+import FirstPage from './pages/firstpage';
+import SecondPage from './pages/secondpage';
+import ThirdPage from './pages/thirdpage';
+
+
+
+class App extends Component {
+  constructor(props){
+    super(props);
+  }
+  // <div>FirstPage</div>
+  //       <EventNameRoot/>
+  //       <CalenderRoot/>
+  //       <button type="submit" onClick={function(){
+  //         console.log(this.props.eventname);
+  //         console.log(this.props.date);
+  //       }.bind(this)}>Create Event</button>
+  
+  render(){
+    return (
+      <div className="App">
+        <FirstPage></FirstPage>
+      </div>
+
+    );
+  }
+  
 }
 
 export default App;
