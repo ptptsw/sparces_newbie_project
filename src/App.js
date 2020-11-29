@@ -26,7 +26,6 @@ class App extends Component {
       <div className="App">
         <FirstPage></FirstPage>
       </div>
-
     );
   }
   

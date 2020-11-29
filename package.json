@@ -1,15 +1,20 @@
 {
   "name": "when2meet",
   "version": "0.1.0",
+  "type": "module",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^4.11.1",
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^11.2.2",
     "@testing-library/user-event": "^12.2.2",
+    "antd": "^4.8.6",
     "axios": "^0.21.0",
     "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "create-react-class": "^15.7.0",
     "express": "^4.17.1",
+    "http-proxy-middleware": "^0.19.1",
     "mongoose": "^5.10.16",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
@@ -22,6 +27,7 @@
     "react-time-range": "^1.0.4",
     "redux": "^4.0.5",
     "rsuite": "^4.8.5",
+    "styled": "^1.0.0",
     "styled-components": "^5.2.1",
     "web-vitals": "^0.2.4"
   },

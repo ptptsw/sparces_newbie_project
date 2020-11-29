@@ -3,7 +3,8 @@ import axios from 'axios';
 //import 'react-dates/initialize';
 //import { DayPickerSingleDateController} from 'react-dates';
 import {DateRangePicker, DatePicker} from 'rsuite';
-import 'rsuite/dist/styles/rsuite-default.css'
+import 'rsuite/dist/styles/rsuite-default.css';
+import ThirdPage from './thirdpage';
 //import 'react-dates/lib/css/_datepicker.css';
 
 
@@ -11,57 +12,72 @@ class SecondPage extends Component{
     constructor(props) {
         super(props);
         this.state = {
-          focused: true,
-          date: props.initialDate,
+          startTime : '',
+          EndTime : '',
+          DateRange : ''
         };
-        this.onDateChange = this.onDateChange.bind(this);
-        this.setState= this.setDate.bind(this);
-        //this.onFocusChange = this.onFocusChange.bind(this);
+        this.setStartTime = this.setStartTime.bind(this);
+        this.setEndTime = this.setEndTime.bind(this);
+        this.setDate = this.setDate.bind(this);
+        this.sendData = this.sendData.bind(this);
     }
 
-    onDateChange(_date) {
-        this.setState({ date : _date });
-        console.log(_date);
-        //console.log(this.state.date)
-        //this.props.onSet(this.state.date);
-    }
 
-    setDate(_date){
-        console.log(_date);
+
+    sendData=()=>{
+        const basicInfo={
+            startTime : this.state.startTime,
+            EndTime : this.state.EndTime,
+            DateRange : this.state.DateRange
+        }
+        fetch('http://localhost:3001',{
+            method : "POST",
+            headers:{
+                'content-type' : 'application/json'
+            },
+            body:JSON.stringify(basicInfo)
+        })
+         .then(res => res.json())
+         .then(data => console.log(data));
     }
     
-    
-    //   onFocusChange() {
-    //     this.setState({ focused: true });
-      
-    // }
-    // <DayPickerSingleDateController
-    //                 onDayClick={this.onDayClick}
-    //                 onDateChange={this.onDateChange}
-    //                 onFocusChange={this.onFocusChange}
-    //                 focused={focused}
-    //                 date={date}
-    //             />
+    setStartTime(_time){
+        _time=_time.getHours()
+        this.setState({startTime : _time});
+        console.log(_time);
+    }
 
+    setEndTime(_time){
+        _time =_time.getHours();
+        this.setState({EndTime : _time});
+        console.log(_time);
+    }
+
+    setDate(_datearray){
+        this.setState({DateRange : _datearray});
+        console.log(_datearray);
+    }
+    
 
     render(){
-        const { focused, date } = this.state;
 
         return(
             <div>
                 <h1>Choose Date!</h1>
-                <DateRangePicker placeholder="Select Date Range" onSelect={this.setDate}/>
+                <DateRangePicker placeholder="Select Date Range" onOk={this.setDate}/>
                 <h1>Start Time</h1>
                 <DatePicker
                     format="HH"
                     ranges={[]}
+                    onOk={this.setStartTime}
                 />
                 <h1>End Time</h1>
                 <DatePicker
                     format="HH"
                     ranges={[]}
+                    onOk={this.setEndTime}
                 />
-                <button type="submit">Set Date</button>
+                <button type="submit" onClick={this.sendData}>Set Date</button>
             </div>
         )
     }

@@ -1,0 +1,31 @@
+.form_box{
+    background-color: aquamarine;
+}
+
+.form{
+    font-size: 30px;
+    background-color: white;
+}
+
+.Button{
+    background-color: cornflowerblue;
+    font-size: 30px;
+}
+
+.container {
+    padding : 10px;
+    display : flex;
+
+}
+
+.date{
+    margin: 0 auto;
+    border : 1px solid red;
+    padding : 10px;
+    margin-left : 50px;
+}
+
+.datepicker{
+    margin : 0 auto;
+}
+
