@@ -1,10 +1,6 @@
 import React, { Component } from 'react'
-import axios from 'axios';
-//import 'react-dates/initialize';
-//import { DayPickerSingleDateController} from 'react-dates';
 import {DateRangePicker, DatePicker} from 'rsuite';
 import 'rsuite/dist/styles/rsuite-default.css';
-import ThirdPage from './thirdpage';
 //import 'react-dates/lib/css/_datepicker.css';
 
 

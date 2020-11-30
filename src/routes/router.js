@@ -6,7 +6,6 @@ import {
 } from 'react-router-dom';
 
 import FirstPage from '../pages/firstpage';
-import SecondPage from '../pages/secondpage';
 import ThirdPage from '../pages/thirdpage';
 import FourthPage from '../pages/fourthpage';
 

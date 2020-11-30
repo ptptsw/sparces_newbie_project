@@ -1,21 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-import AppRoot from './AppRoot';
+import './css/font.css';
 import reportWebVitals from './reportWebVitals';
-import {createStore} from 'redux';
-import {Provider} from 'react-redux';
-import store from "./store";
+
 import Routes from "./routes/router"
 
-import makeEvent from './reducers';
 
-console.log(store);
-{/* <Provider store = {store}>
-<AppRoot />
-</Provider>,
-document.getElementById('root') */}
+
 
 ReactDOM.render(<Routes />, document.getElementById('root'));
 

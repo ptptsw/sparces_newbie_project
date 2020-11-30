@@ -1,9 +1,10 @@
 import ScheduleSelector from 'react-schedule-selector';
-import React, { Component } from 'react';
+import React from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from "prop-types";
 import styled from 'styled-components';
 import { Checkbox } from 'antd';
+import '../css/font.css';
 
 const StyledButton = styled.button`
     margin: 0 auto;
@@ -14,9 +15,9 @@ const StyledButton = styled.button`
     text-align : center;
     padding : 5px;
     padding-top : 10px;
-    padding-bottom: 10px;
-    height : 40px;
-    line-height : 20px;
+    padding-bottom : 10px;
+    height : 30px;
+    line-height : 10px;
 `;
 
 const AppContainer = styled.div`
@@ -32,8 +33,9 @@ const AppContainer = styled.div`
 const HeaderContainer = styled.header`
   padding: 20px;
   font-size: 30px;
-  font-weigth : 700;
-  color : white;
+  font-weigth : 900;
+  color : #FDC959;
+  font-family: 'Bitter', serif;
   background-color: #0D2840;
 `;
 
@@ -48,97 +50,26 @@ const Main = styled.div`
 const Container = styled.div`
   width : 70%;
   height: 90%;
-  padding : 15px;
+  padding : 20px;
   margin : 0 auto;
   box-shadow : 10px 10px 10px grey;
   background-color: white;
-  border : 1px solid black;
   margin-bottom : 10px;
 
 `;
 
-const Container_Box = styled.div`
-  width : 80%;
-  height: 100%;
-  padding : 15px;
-  margin : 0 auto;
 
-`;
-
-const Container_date = styled.div`
-  width : 90%;
-  height: 30%;
-  padding : 15px;
-  box-shadow : 10px 10px 10px grey;
-  margin : 0 auto;
-  margin-bottom : 10px;
-  background-color : white;
-
-`;
-
-const Form = styled.div`
-        width : 80%;
-        padding : 15px;
-        margin : 0 auto;
-        margin-Bottom : 15px;
-        color : #2C3947;
-        background-color : white;
-`;
-
-const Title = styled.div`
-    font-size : 30px;
-    width : 80%;
-    margin : 0 auto;
-    margin-Top : 70px;
-    margin-Bottom : 15px;
-    text-align : center;
-    color : #2C3947;
-    background-color : white;
-`;
-
-const Title_2 = styled.div`
-    font-size : 20px;
-    width : 100%;
-    margin : 0 auto;
-    text-align : left;
-    color : #2C3947;
-    background-color : white;
-    border-bottom : 2px solid grey;
-    margin-bottom : 8px;
-`;
-
-const Input = styled.input.attrs({
-    required: true
-})
-    `
-    border: 2px solid black ;
-    padding : 10px;
-    width : 100%;
-    text-align: left;
-`;
-
-const Container_Element = styled.div`
-width : 100%;
-height: 30%;
-padding : 15px;
-margin : 0 auto;
-margin-bottom : 10px;
-background-color : white;
-
-`;
 
 const Column1 = styled.div`
     width : 70%;
     float : left;
-    padding :3px;
-    border : 1px solid red;
+    padding :5px;
 `;
 
 const Column2 = styled.div`
     width: 30%;
     float : left;
-    padding :3x;
-    border : 1px solid red;
+    padding :5x;
 `;
 
 class FourthPage extends React.Component {
@@ -154,34 +85,35 @@ class FourthPage extends React.Component {
         }
         this.handleStartDate = this.handleStartDate.bind(this);
         this.SendAvailable = this.SendAvailable.bind(this);
+	this.copyToClipboard= this.copyToClipboard.bind(this);
     }
 
     componentDidMount() {
         const eventname = this.props.match.params.eventname;
         const nickname = this.props.match.params.nickname;
-        // fetch(`http://localhost:3001/geteventinfo/${eventname}/${nickname}`)
-        //     .then(res => res.json())
-        //     .then(data => this.setState({
-        //         minTime: data.eventStartTime,
-        //         maxTime: data.eventEndTime,
-        //         startDate: data.eventDateRange[0],
-        //         endDate: data.eventDateRange[1]
-        //     }));
-        Promise.all([
-            fetch(`http://localhost:3001/geteventinfo/${eventname}/${nickname}`),
-            fetch(`http://localhost:3001/getavailable/${eventname}/${nickname}`)
-        ]).then(([res1, res2]) => {
-            return Promise.all([res1.json(), res2.json()])
-        })
-            .then(([res1, res2]) => {
-                console.log(res1);
-                this.setState({
-                    minTime: res1.eventStartTime,
-                    maxTime: res1.eventEndTime,
-                    startDate: res1.eventDateRange[0],
-                    endDate: res1.eventDateRange[1]
-                })
-            });
+         fetch(`http://ssal.sparcs.org:50912/geteventinfo/${eventname}/${nickname}`)
+             .then(res => res.json())
+             .then(data => this.setState({
+                 minTime: data.eventStartTime,
+                 maxTime: data.eventEndTime,
+                 startDate: data.eventDateRange[0],
+                 endDate: data.eventDateRange[1]
+             }));
+        //Promise.all([
+            //fetch(`http://172.17.0.12:3000/geteventinfo/${eventname}/${nickname}`),
+            //fetch(`http://172.17.0.12:3000/getavailable/${eventname}/${nickname}`)
+        //]).then(([res1, res2]) => {
+          //  return Promise.all([res1.json(), res2.json()])
+       // })
+          //  .then(([res1, res2]) => {
+            //    console.log(res1);
+              //  this.setState({
+                //    minTime: res1.eventStartTime,
+                  //  maxTime: res1.eventEndTime,
+                   // startDate: res1.eventDateRange[0],
+                   // endDate: res1.eventDateRange[1]
+               // })
+           // });
 
     }
 
@@ -209,7 +141,7 @@ class FourthPage extends React.Component {
         console.log(available);
         const eventname = this.props.match.params.eventname;
         const nickname = this.props.match.params.nickname;
-        fetch(`http://localhost:3001/available/${eventname}/${nickname}`, {
+        fetch(`http://ssal.sparcs.org:50912/available/${eventname}/${nickname}`, {
             method: "POST",
             headers: {
                 'content-type': 'application/json'
@@ -220,17 +152,30 @@ class FourthPage extends React.Component {
             .then(data => console.log(data));
     }
 
+	copyToClipboard = (e) => {
+		        this.textArea.select();
+		        document.execCommand('copy');
+		        e.target.focus();
+		    }
+
     render() {
-        const { match, location, history } = this.props;
-        //console.log(match.params.eventname);
+       	const eventname = this.props.match.params.eventname;
+	const url = `http://ssal.sparcs.org:40398/event/${eventname}`;
+	const tstyle={
+		 width: "100%",
+		padding: "1px",
+		border: "solid 2px #1E90FF",
+		fontSize: "16px",
+	        }
         return (
             <AppContainer>
                 <HeaderContainer>When2Meet</HeaderContainer>
                 <Main>
                     <Column1>
                         <Container>
-                            <p>Sharelike : </p>
-                            <Input label="ShareLink" placeholder="This is ShareLink" />
+                            	<p>Sharelike : </p>
+                            	<textarea ref={(textarea)=>this.textArea = textarea} value={url} style={tstyle} readonly />
+		                <button onClick={this.copyToClipboard}>Copy</button>
                         </Container>
                         <Container>
                             <ScheduleSelector

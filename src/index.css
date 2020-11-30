@@ -6,6 +6,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: rgba(36,105,166);
+  font-family: 'Bitter', serif;
 }
 
 code {
@@ -17,5 +18,6 @@ html{
   margin: 0;
   padding: 0;
   height: 100%;
+  font-family : "Bitter", serif;
   background-color:rgba(78,125,166, 0.15); 
 }

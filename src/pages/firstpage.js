@@ -1,14 +1,10 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { withRouter } from 'react-router-dom';
-import Layout from '../components/Layout';
-//import {Content, Container} from 'rsuite';
 import { DateRangePicker, DatePicker } from 'rsuite';
-//import 'rsuite/dist/styles/rsuite-default.css';
-import ThirdPage from './thirdpage';
-//import {Button} from '@material-ui/core';
 import styles from '../css/firstpage.css';
-import styled, { css } from 'styled-components';
-//import styles from '../css/font.css';
+import 'rsuite/dist/styles/rsuite-default.css';
+import styled from 'styled-components';
+import '../css/font.css';
 
 const StyledButton = styled.button`
     margin: 0 auto;
@@ -37,8 +33,9 @@ const AppContainer = styled.div`
 const HeaderContainer = styled.header`
   padding: 20px;
   font-size: 30px;
-  font-weigth : 700;
-  color : white;
+  font-weigth : 900;
+  color : #FDC959;
+  font-family: 'Bitter', serif;
   background-color: #0D2840;
 `;
 
@@ -60,7 +57,7 @@ const Container = styled.div`
 
 `;
 
-const Container_Box = styled.div`
+const ContainerBox = styled.div`
   width : 80%;
   height: 100%;
   padding : 15px;
@@ -68,7 +65,7 @@ const Container_Box = styled.div`
 
 `;
 
-const Container_date = styled.div`
+const Containerdate = styled.div`
   width : 90%;
   height: 30%;
   padding : 15px;
@@ -96,15 +93,17 @@ const Title = styled.div`
     margin-Bottom : 15px;
     text-align : center;
     color : #2C3947;
+    font-family: 'Bitter', serif;
     background-color : white;
 `;
 
-const Title_2 = styled.div`
+const Title2 = styled.div`
     font-size : 20px;
     width : 100%;
     margin : 0 auto;
     text-align : left;
     color : #2C3947;
+    font-family: 'Bitter', serif;
     background-color : white;
     border-bottom : 2px solid grey;
     margin-bottom : 8px;
@@ -120,7 +119,7 @@ const Input = styled.input.attrs({
     text-align: left;
 `;
 
-const Container_Element = styled.div`
+const ContainerElement = styled.div`
 width : 100%;
 height: 30%;
 padding : 15px;
@@ -154,7 +153,7 @@ class Firstpage extends React.Component {
         }
         this.setState({ firstpage: false });
         console.log(eventname)
-        fetch('http://localhost:3001', {
+        fetch('http://ssal.sparcs.org:50912', {
             method: "POST",
             headers: {
                 'content-type': 'application/json'
@@ -172,7 +171,7 @@ class Firstpage extends React.Component {
             DateRange: this.state.DateRange,
             eventname: this.state.eventname
         }
-        fetch('http://localhost:3001/datetime', {
+        fetch('http://ssal.sparcs.org:50912/datetime', {
             method: "POST",
             headers: {
                 'content-type': 'application/json'
@@ -225,40 +224,39 @@ class Firstpage extends React.Component {
                                 }.bind(this)}
                                 name="eventname"
                             />
-                            <StyledButton type="submit" onClick={this.goToDate}>go</StyledButton>
+                            <StyledButton type="submit" onClick={this.goToDate}>Start</StyledButton>
                         </Form>
 
                     </Container>
                 </Main>
         } else {
             box = <Main>
-                <Container_Box>
-                    <Container_date>
-                        <Container_Element>
-                            <Title_2>Set Date</Title_2>
-                            <DateRangePicker className={styles.date} placeholder="Select Date Range" onOk={this.setDate} />
-                        </Container_Element>
-                        <Container_Element>
-                            <Title_2>Set Time</Title_2>
-                            <p>From</p>
-                            <DatePicker
-                                format="HH"
-                                ranges={[]}
-                                onOk={this.setStartTime}
-                                className={styles.datepicker}
-                            />
-                            <p>To</p>
-                            <DatePicker
-                                format="HH"
-                                ranges={[]}
-                                onOk={this.setEndTime}
-                                className={styles.datepicker}
-                            />
-                        </Container_Element>
-                        <StyledButton type="submit" onClick={this.sendData}>Set Date</StyledButton>
-                    </Container_date>
-
-                </Container_Box>
+               		 <ContainerBox>
+                   		 <Containerdate> 
+                        		<ContainerElement> 
+                            			<Title2>Set Date</Title2> 
+                            			<DateRangePicker className={styles.date} placeholder="Select Date Range" onOk={this.setDate} />
+                       			 </ContainerElement>
+                       		 	<ContainerElement>
+                            			<Title2>Set Time</Title2> 
+                            			<p>From</p>
+                           			 <DatePicker
+                                			format="HH"
+                                			ranges={[]}
+                               				 onOk={this.setStartTime}
+                                			className={styles.datepicker}
+                            			/>
+                           			 <p>To</p>
+                           			 <DatePicker
+                                			format="HH"
+                                			ranges={[]}
+                                			onOk={this.setEndTime}
+                               				 className={styles.datepicker}
+                           			 />
+                        		</ContainerElement>
+                        	<StyledButton type="submit" onClick={this.sendData}>Create Event</StyledButton>
+                   	 </Containerdate>
+               	 </ContainerBox>
             </Main>;
         }
 

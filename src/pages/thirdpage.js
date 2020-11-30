@@ -1,9 +1,8 @@
-import ScheduleSelector from 'react-schedule-selector';
-import React, { Component } from 'react';
+import React from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from "prop-types";
 import styled from 'styled-components';
-
+import '../css/font.css';
 const StyledButton = styled.button`
     margin: 0 auto;
     margin-top : 15px;
@@ -31,9 +30,10 @@ const AppContainer = styled.div`
 const HeaderContainer = styled.header`
   padding: 20px;
   font-size: 30px;
-  font-weigth : 700;
+  font-weigth : 900;
+  font-family: 'Bitter', serif;
   width:100%;
-  color : white;
+  color : #FDC959;
   background-color: #0D2840;
 `;
 
@@ -73,6 +73,7 @@ const Title = styled.div`
     margin-Bottom : 15px;
     text-align : center;
     color : #2C3947;
+    font-family: 'Bitter', serif;
     background-color : white;
 `;
 
@@ -132,7 +133,7 @@ class ThirdPage extends React.Component {
     }
     console.log(nickname);
 
-    fetch('http://localhost:3001/nickname', {
+    fetch('http://ssal.sparcs.org:50912/nickname', {
       method: "POST",
       headers: {
         'content-type': 'application/json'
@@ -145,6 +146,7 @@ class ThirdPage extends React.Component {
   }
 
   render() {
+	// eslint-disable-next-line
     const { match, location, history } = this.props;
     return (
       <AppContainer>
@@ -152,7 +154,7 @@ class ThirdPage extends React.Component {
         <Main>
           <Container>
             <Form>
-              <Title>Create NickName</Title>
+              <Title>Enter Your NickName</Title>
               <Input
                 placeholder="Plese enter your name"
                 value={this.state.nickname}
